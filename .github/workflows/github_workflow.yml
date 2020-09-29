@@ -43,5 +43,5 @@ jobs:
     - name: Save build
       uses: actions/upload-artifact@v2
       with:
-        name: aria2-artifact
-        path: src/aria2c.exe
+        name: aria2-${{ github.event.inputs.name }}
+        path: ${{ github.workspace }}/aria2-1.35.0/src/aria2c.exe
