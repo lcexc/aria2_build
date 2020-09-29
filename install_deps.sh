@@ -4,24 +4,35 @@ export HOST=i686-w64-mingw32
 
 mkdir -p deps && cd deps
 
-DEPS=("https://gmplib.org/download/gmp/gmp-6.1.2.tar.lz" \
-"https://github.com/libexpat/libexpat/releases/download/R_2_2_7/expat-2.2.7.tar.bz2" \
+DEPS=("https://gmplib.org/download/gmp/gmp-6.1.2.tar.xz" \
+"https://github.com/libexpat/libexpat/releases/download/R_2_2_7/expat-2.2.7.tar.xz" \
 "https://www.sqlite.org/2019/sqlite-autoconf-3290000.tar.gz" \
 "http://zlib.net/zlib-1.2.11.tar.gz" \
 "https://c-ares.haxx.se/download/c-ares-1.15.0.tar.gz" \
 "https://www.libssh2.org/download/libssh2-1.9.0.tar.gz")
 
-for flink in ${DEPS[*]}; do
-    fsplit=(${flink//\// })
-    fname=${fsplit[-1]}
-    if [ ! -f "$fname" ]; then
-        curl -s -O $flink
-        echo -e "downloaded: $fname."
+retry=3
+
+while [ $retry -gt 0 ]; do
+    for flink in ${DEPS[*]}; do
+        fsplit=(${flink//\// })
+        fname=${fsplit[-1]}
+        if [ ! -f "$fname" ]; then
+            echo -e "downloading: $fname"
+            curl -L -O $flink
+        fi
+    done
+    md5sum -c ../pkg.md5sum
+    if [ $? -eq 0 ]; then
+        break
     fi
+    sleep 3
+    retry=`expr $retry - 1`
 done
 
 
-tar xf gmp-6.1.2.tar.lz && \
+
+tar xf gmp-6.1.2.tar.xz && \
     cd gmp-6.1.2 && \
     ./configure \
         --disable-shared \
@@ -34,7 +45,7 @@ tar xf gmp-6.1.2.tar.lz && \
     make install
 
 cd ..
-tar xf expat-2.2.7.tar.bz2 && \
+tar xf expat-2.2.7.tar.xz && \
     cd expat-2.2.7 && \
     ./configure \
         --disable-shared \
@@ -96,5 +107,3 @@ tar xf libssh2-1.9.0.tar.gz && \
         --with-wincng \
         LIBS="-lws2_32" && \
     make install
-
-
