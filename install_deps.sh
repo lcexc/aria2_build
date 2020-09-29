@@ -22,6 +22,7 @@ tar xf gmp-6.1.2.tar.lz && \
         CFLAGS="-mtune=generic -O2 -g0" && \
     make install
 
+cd ..
 tar xf expat-2.2.7.tar.bz2 && \
     cd expat-2.2.7 && \
     ./configure \
@@ -32,6 +33,7 @@ tar xf expat-2.2.7.tar.bz2 && \
         --build=`dpkg-architecture -qDEB_BUILD_GNU_TYPE` && \
     make install
 
+cd ..
 tar xf sqlite-autoconf-3290000.tar.gz && \
     cd sqlite-autoconf-3290000 && \
     ./configure \
@@ -42,6 +44,7 @@ tar xf sqlite-autoconf-3290000.tar.gz && \
         --build=`dpkg-architecture -qDEB_BUILD_GNU_TYPE` && \
     make install
 
+cd ..
 tar xf zlib-1.2.11.tar.gz && \
     cd zlib-1.2.11 && \
     CC=$HOST-gcc \
@@ -56,6 +59,7 @@ tar xf zlib-1.2.11.tar.gz && \
         --static && \
     make install
 
+cd ..
 tar xf c-ares-1.15.0.tar.gz && \
     cd c-ares-1.15.0 && \
     ./configure \
@@ -68,6 +72,7 @@ tar xf c-ares-1.15.0.tar.gz && \
         LIBS="-lws2_32" && \
     make install
 
+cd ..
 tar xf libssh2-1.9.0.tar.gz && \
     cd libssh2-1.9.0 && \
     ./configure \
