@@ -20,7 +20,6 @@ jobs:
 
     - name: Install 
       run: |
-        cat /etc/apt/sources.list
         sudo cat sources.list > /etc/apt/sources.list
         sudo apt -qq update
         sudo apt-get install -y -qq make binutils autoconf automake \
