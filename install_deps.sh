@@ -1,4 +1,4 @@
-#!=/bin/bash
+#!/bin/bash
 
 export HOST=i686-w64-mingw32
 
