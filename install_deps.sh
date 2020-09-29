@@ -2,13 +2,24 @@
 
 export HOST=i686-w64-mingw32
 
-mkdir deps && cd deps
-curl -L -O https://gmplib.org/download/gmp/gmp-6.1.2.tar.lz
-curl -L -O https://github.com/libexpat/libexpat/releases/download/R_2_2_7/expat-2.2.7.tar.bz2
-curl -L -O https://www.sqlite.org/2019/sqlite-autoconf-3290000.tar.gz
-curl -L -O http://zlib.net/zlib-1.2.11.tar.gz
-curl -L -O https://c-ares.haxx.se/download/c-ares-1.15.0.tar.gz
-curl -L -O https://www.libssh2.org/download/libssh2-1.9.0.tar.gz
+mkdir -p deps && cd deps
+
+DEPS=("https://gmplib.org/download/gmp/gmp-6.1.2.tar.lz" \
+"https://github.com/libexpat/libexpat/releases/download/R_2_2_7/expat-2.2.7.tar.bz2" \
+"https://www.sqlite.org/2019/sqlite-autoconf-3290000.tar.gz" \
+"http://zlib.net/zlib-1.2.11.tar.gz" \
+"https://c-ares.haxx.se/download/c-ares-1.15.0.tar.gz" \
+"https://www.libssh2.org/download/libssh2-1.9.0.tar.gz")
+
+for flink in ${DEPS[*]}; do
+    fsplit=(${flink//\// })
+    fname=${fsplit[-1]}
+    if [ ! -f "$fname" ]; then
+        curl -s -O $flink
+        echo -e "downloaded: $fname."
+    fi
+done
+
 
 tar xf gmp-6.1.2.tar.lz && \
     cd gmp-6.1.2 && \

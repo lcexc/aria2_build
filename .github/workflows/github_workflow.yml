@@ -26,6 +26,15 @@ jobs:
         autotools-dev libtool pkg-config git curl dpkg-dev gcc-mingw-w64 \
         g++-mingw-w64 autopoint libcppunit-dev libxml2-dev libgcrypt11-dev lzip
 
+    - name: Cache deps
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-deps
+      with:
+        path: $GITHUB_WORKSPACE/deps
+        key: build-${{ env.cache-name }}
+        restore-keys: build-${{ env.cache-name }}
+
     - name: Compile deps
       run: |
         pwd
