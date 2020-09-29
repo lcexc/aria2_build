@@ -27,16 +27,16 @@ jobs:
 
     - name: Compile deps
       run: |
-      chmod +x $DEP_INSTALL_SH
-      $GITHUB_WORKSPACE/$DEP_INSTALL_SH 
+        chmod +x $DEP_INSTALL_SH
+        $GITHUB_WORKSPACE/$DEP_INSTALL_SH 
 
     - name: Compile
       run: |
-      wget https://github.com/aria2/aria2/releases/download/release-1.35.0/aria2-1.35.0.tar.gz
-      tar xf aria2-1.35.0.tar.gz
-      cd aria2-1.35.0
-      autoreconf -i && ./mingw-config && make
-      $HOST-strip src/aria2c.exe
+        wget https://github.com/aria2/aria2/releases/download/release-1.35.0/aria2-1.35.0.tar.gz
+        tar xf aria2-1.35.0.tar.gz
+        cd aria2-1.35.0
+        autoreconf -i && ./mingw-config && make
+        $HOST-strip src/aria2c.exe
 
     - name: Save build
       uses: actions/upload-artifact@v2
