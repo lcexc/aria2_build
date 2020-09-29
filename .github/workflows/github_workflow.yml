@@ -28,7 +28,7 @@ jobs:
     - name: Compile deps
       run: |
       chmod +x $DEP_INSTALL_SH
-      sudo $GITHUB_WORKSPACE/$DEP_INSTALL_SH 
+      $GITHUB_WORKSPACE/$DEP_INSTALL_SH 
 
     - name: Compile
       run: |
