@@ -20,7 +20,7 @@ jobs:
 
     - name: Install 
       run: |
-        sudo cat sources.list > /etc/apt/sources.list
+        sudo cp sources.list /etc/apt/sources.list
         sudo apt -qq update
         sudo apt-get install -y -qq make binutils autoconf automake \
         autotools-dev libtool pkg-config git curl dpkg-dev gcc-mingw-w64 \
