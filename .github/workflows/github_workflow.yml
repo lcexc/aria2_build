@@ -22,10 +22,10 @@ jobs:
       run: |
         cat /etc/apt/sources.list
         sudo cat sources.list > /etc/apt/sources.list
-        sudo apt-get install -y make binutils autoconf automake \
+        sudo apt -qq update
+        sudo apt-get install -y -qq make binutils autoconf automake \
         autotools-dev libtool pkg-config git curl dpkg-dev gcc-mingw-w64 \
         g++-mingw-w64 autopoint libcppunit-dev libxml2-dev libgcrypt11-dev lzip
-
 
     - name: Compile deps
       run: |
