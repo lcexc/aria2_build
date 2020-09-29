@@ -19,7 +19,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install 
-      run: apt-get install -y \
+      run: sudo apt-get install -y \
         make binutils autoconf automake autotools-dev libtool \
         pkg-config git curl dpkg-dev gcc-mingw-w64 g++-mingw-w64 \
         autopoint libcppunit-dev libxml2-dev libgcrypt11-dev lzip
@@ -28,7 +28,7 @@ jobs:
     - name: Compile deps
       run: |
         chmod +x $DEP_INSTALL_SH
-        $GITHUB_WORKSPACE/$DEP_INSTALL_SH 
+        sudo $GITHUB_WORKSPACE/$DEP_INSTALL_SH 
 
     - name: Compile
       run: |
